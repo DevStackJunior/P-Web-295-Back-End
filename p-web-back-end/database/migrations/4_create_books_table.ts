@@ -8,30 +8,30 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.string('title')
-      table.tinyint('numberOfPages')
-      table.string('pdfLink')
+      table.specificType('number_of_pages', 'smallint')
+      table.string('pdf_link')
       table.text('abstract')
       table.string('editor')
-      table.tinyint('editionYear')
-      table.string('imagePath')
+      table.specificType('edition_year', 'smallint')
+      table.string('image_path')
 
       //Déclaration des foreign keys 
       table
-      .integer('idCategory')
+      .integer('id_category')
       .unsigned()
       .references('id')
       .inTable('categories')  //quelle référence pour cerner en majuscule ou minuscule?
       .onDelete('SET NULL') //malgré suppression de livres/commentaires la catégorie est permanente 
 
       table
-      .integer('idWriter')
+      .integer('id_writer')
       .unsigned()
       .references('id')
       .inTable('writers')
       .onDelete('SET NULL') // a checker ultérieurement (logique)
 
       table
-      .integer('idUser')
+      .integer('id_user')
       .unsigned()
       .references('id')
       .inTable('users')

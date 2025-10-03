@@ -17,7 +17,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare id: number
 
   @column()
-  declare userName: string 
+  declare username: string 
   
   @column()
   declare isAdmin: boolean

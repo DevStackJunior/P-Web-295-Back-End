@@ -5,19 +5,18 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
       
       table.text('comment')
 
       table
-      .integer('idBook')
+      .integer('id_book')
       .unsigned()
       .references('id')
       .inTable('books')
       .onDelete('CASCADE') // Si on supprime 1 livre -> le/s commentaire/s est supprimé
 
       table
-      .integer('idUser')
+      .integer('id_user')
       .unsigned()
       .references('id')
       .inTable('users')

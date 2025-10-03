@@ -13,7 +13,7 @@ export default class Book extends BaseModel {
   @column()
   declare title: string
 
-  //number = Tiny Int
+  //number = Small Int
   @column()
   declare numberOfPages: number
 
@@ -27,7 +27,7 @@ export default class Book extends BaseModel {
   @column() 
   declare editor: string
 
-  //number = Tiny Int
+  //number = Small Int
   @column() 
   declare editionYear: number
 
