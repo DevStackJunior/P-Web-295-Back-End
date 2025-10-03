@@ -7,10 +7,20 @@
 |
 */
 
+import BooksController from '#controllers/books_controller'
+import CategoriesController from '#controllers/categories_controller'
+import UsersController from '#controllers/users_controller'
+import WritersController from '#controllers/writers_controller'
 import router from '@adonisjs/core/services/router'
+
 
 router.get('/', async () => {
   return {
     hello: 'world',
   }
 })
+
+router.resource('books', BooksController).apiOnly()
+router.resource('categories', CategoriesController).apiOnly()
+router.resource('writers', WritersController).apiOnly()
+router.resource('users', UsersController).apiOnly()

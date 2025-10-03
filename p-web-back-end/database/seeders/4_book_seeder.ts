@@ -19,9 +19,9 @@ export default class extends BaseSeeder {
         editor: 'Gallimard',
         editionYear: 1943,
         imagePath: '/images/petit-prince.jpg',
-        idCategory: categories[0].id, // Fiction
-        idWriter: writers[0].id, // Antoine de Saint-Exupéry        
-        idUser: users[1].id
+        categoryId: categories[0].id, // Fiction
+        writerId: writers[0].id, // Antoine de Saint-Exupéry        
+        userId: users[1].id
       },
       {
         title: '1984',
@@ -31,9 +31,9 @@ export default class extends BaseSeeder {
         editor: 'Secker & Warburg',
         editionYear: 1949,
         imagePath: '/images/1984.jpg',
-        idCategory: categories[1].id, // Science-Fiction
-        idWriter: writers[1].id, // George Orwell
-        idUser: users[0].id
+        categoryId: categories[1].id, // Science-Fiction
+        writerId: writers[1].id, // George Orwell
+        userId: users[0].id
       },
       {
         title: 'L\'Étranger',
@@ -43,9 +43,9 @@ export default class extends BaseSeeder {
         editor: 'Gallimard',
         editionYear: 1942,
         imagePath: '/images/etranger.jpg',
-        idCategory: categories[0].id, // Fiction
-        idWriter: writers[2].id, // Albert Camus
-        idUser: users[1].id
+        categoryId: categories[0].id, // Fiction
+        writerId: writers[2].id, // Albert Camus
+        userId: users[1].id
       },
       {
         title: 'Harry Potter à l\'école des sorciers',
@@ -55,9 +55,9 @@ export default class extends BaseSeeder {
         editor: 'Gallimard Jeunesse',
         editionYear: 1997,
         imagePath: '/images/harry-potter-1.jpg',
-        idCategory: categories[2].id, // Fantasy
-        idWriter: writers[3].id, // J.K. Rowling
-        idUser: users[1].id
+        categoryId: categories[2].id, // Fantasy
+        writerId: writers[3].id, // J.K. Rowling
+        userId: users[1].id
       },
       {
         title: 'Le Seigneur des Anneaux',
@@ -67,9 +67,9 @@ export default class extends BaseSeeder {
         editor: 'Allen & Unwin',
         editionYear: 1954,
         imagePath: '/images/lotr.jpg',
-        idCategory: categories[2].id, // Fantasy
-        idWriter: writers[4].id, // J.R.R. Tolkien
-        idUser: users[0].id
+        categoryId: categories[2].id, // Fantasy
+        writerId: writers[4].id, // J.R.R. Tolkien
+        userId: users[0].id
       },
       {
         title: 'Sapiens: Une brève histoire de l\'humanité',
@@ -79,9 +79,9 @@ export default class extends BaseSeeder {
         editor: 'Albin Michel',
         editionYear: 2011,
         imagePath: '/images/sapiens.jpg',
-        idCategory: categories[3].id, // Histoire
-        idWriter: writers[5].id, // Yuval Noah Harari
-        idUser: users[0].id
+        categoryId: categories[3].id, // Histoire
+        writerId: writers[5].id, // Yuval Noah Harari
+        userId: users[0].id
       }
     ])
   }

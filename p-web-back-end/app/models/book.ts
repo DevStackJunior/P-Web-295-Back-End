@@ -36,13 +36,13 @@ export default class Book extends BaseModel {
 
   //Récupération des 3 clefs étrangères 
   @column()
-  declare idCategory: number | null
+  declare categoryId: number | null
 
   @column()
-  declare idWriter: number | null
+  declare writerId: number | null
 
   @column()
-  declare idUser: number | null
+  declare userId: number | null
 
   //Assignation des clefs étrangères à book
   @belongsTo(()=> Category)

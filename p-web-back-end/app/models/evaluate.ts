@@ -15,10 +15,10 @@ export default class Evaluate extends BaseModel {
   //Récupération des 2 clefs étrangères 
   
   @column()
-  declare idBook: number | null
+  declare bookId: number | null
   
   @column()
-  declare idUser: number | null
+  declare userId: number | null
   
   //Assignation des clefs étrangères à book
   @belongsTo(()=> Book)

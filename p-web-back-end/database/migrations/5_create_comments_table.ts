@@ -9,14 +9,14 @@ export default class extends BaseSchema {
       table.text('comment')
 
       table
-      .integer('id_book')
+      .integer('book_id')
       .unsigned()
       .references('id')
       .inTable('books')
       .onDelete('CASCADE') // Si on supprime 1 livre -> le/s commentaire/s est supprimé
 
       table
-      .integer('id_user')
+      .integer('user_id')
       .unsigned()
       .references('id')
       .inTable('users')

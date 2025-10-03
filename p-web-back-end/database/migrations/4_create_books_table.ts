@@ -17,21 +17,21 @@ export default class extends BaseSchema {
 
       //Déclaration des foreign keys 
       table
-      .integer('id_category')
+      .integer('category_id')
       .unsigned()
       .references('id')
       .inTable('categories')  //quelle référence pour cerner en majuscule ou minuscule?
       .onDelete('SET NULL') //malgré suppression de livres/commentaires la catégorie est permanente 
 
       table
-      .integer('id_writer')
+      .integer('writer_id')
       .unsigned()
       .references('id')
       .inTable('writers')
       .onDelete('SET NULL') // a checker ultérieurement (logique)
 
       table
-      .integer('id_user')
+      .integer('user_id')
       .unsigned()
       .references('id')
       .inTable('users')

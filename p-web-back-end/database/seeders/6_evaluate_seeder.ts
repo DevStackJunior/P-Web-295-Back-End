@@ -11,78 +11,78 @@ export default class extends BaseSeeder {
     await Evaluate.createMany([
       {
         note: 5,
-        idBook: books[0].id, // Le Petit Prince
-        idUser: users[0].id  // jean_dupont
+        bookId: books[0].id, // Le Petit Prince
+        userId: users[0].id  // jean_dupont
       },
       {
         note: 1,
-        idBook: books[1].id, // 1984
-        idUser: users[2].id  // marie_martin
+        bookId: books[1].id, // 1984
+        userId: users[2].id  // marie_martin
       },
       {
         note: 3,
-        idBook: books[2].id, // L'Étranger
-        idUser: users[3].id  // paul_bernard
+        bookId: books[2].id, // L'Étranger
+        userId: users[3].id  // paul_bernard
       },
       {
         note: 0,
-        idBook: books[3].id, // Harry Potter
-        idUser: users[4].id  // sophie_dubois
+        bookId: books[3].id, // Harry Potter
+        userId: users[4].id  // sophie_dubois
       },
       {
         note: 2,
-        idBook: books[4].id, // Le Seigneur des Anneaux
-        idUser: users[1].id  // jean_dupont (même user que users[0] ? ici users[1] pour varier)
+        bookId: books[4].id, // Le Seigneur des Anneaux
+        userId: users[1].id  // jean_dupont (même user que users[0] ? ici users[1] pour varier)
       },
       {
         note: 4,
-        idBook: books[5].id, // Sapiens
-        idUser: users[2].id  // marie_martin
+        bookId: books[5].id, // Sapiens
+        userId: users[2].id  // marie_martin
       },
       {
         note: 3,
-        idBook: books[0].id, // Le Petit Prince
-        idUser: users[3].id  // paul_bernard
+        bookId: books[0].id, // Le Petit Prince
+        userId: users[3].id  // paul_bernard
       },
       {
         note: 1,
-        idBook: books[1].id, // 1984
-        idUser: users[4].id  // sophie_dubois
+        bookId: books[1].id, // 1984
+        userId: users[4].id  // sophie_dubois
       },
       {
         note: 4,
-        idBook: books[2].id, // L'Étranger
-        idUser: users[1].id  // jean_dupont
+        bookId: books[2].id, // L'Étranger
+        userId: users[1].id  // jean_dupont
       },
       {
         note: 2,
-        idBook: books[3].id, // Harry Potter
-        idUser: users[2].id  // marie_martin
+        bookId: books[3].id, // Harry Potter
+        userId: users[2].id  // marie_martin
       },
       {
         note: 1,
-        idBook: books[4].id, // Le Seigneur des Anneaux
-        idUser: users[3].id  // paul_bernard
+        bookId: books[4].id, // Le Seigneur des Anneaux
+        userId: users[3].id  // paul_bernard
       },
       {
         note: 5,
-        idBook: books[5].id, // Sapiens
-        idUser: users[4].id  // sophie_dubois
+        bookId: books[5].id, // Sapiens
+        userId: users[4].id  // sophie_dubois
       },
       {
         note: 0,
-        idBook: books[0].id, // Le Petit Prince
-        idUser: users[2].id  // marie_martin
+        bookId: books[0].id, // Le Petit Prince
+        userId: users[2].id  // marie_martin
       },
       {
         note: 3,
-        idBook: books[1].id, // 1984
-        idUser: users[3].id  // paul_bernard
+        bookId: books[1].id, // 1984
+        userId: users[3].id  // paul_bernard
       },
       {
         note: 2,
-        idBook: books[4].id, // Le Seigneur des Anneaux
-        idUser: users[4].id  // sophie_dubois
+        bookId: books[4].id, // Le Seigneur des Anneaux
+        userId: users[4].id  // sophie_dubois
       }
     ])
   }

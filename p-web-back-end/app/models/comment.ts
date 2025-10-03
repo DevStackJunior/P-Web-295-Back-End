@@ -14,17 +14,17 @@ export default class Comment extends BaseModel {
  //Récupération des 2 clefs étrangères 
 
   @column()
-  declare idBook: number | null
+  declare bookId: number | null
 
   @column()
-  declare idUser: number | null
+  declare userId: number | null
 
   //Assignation des clefs étrangères à book
-    @belongsTo(()=> Book)
-    declare book: BelongsTo<typeof Book>
+  @belongsTo(()=> Book)
+  declare book: BelongsTo<typeof Book>
   
-    @belongsTo(()=> User)
-    declare user: BelongsTo<typeof User>
+  @belongsTo(()=> User)
+  declare user: BelongsTo<typeof User>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

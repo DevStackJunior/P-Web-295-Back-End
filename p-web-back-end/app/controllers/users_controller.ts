@@ -1,12 +1,12 @@
-import Category from '#models/category'
+import User from '#models/user'
 import type { HttpContext } from '@adonisjs/core/http'
 
-export default class CategoriesController {
+export default class UsersController {
   /**
    * Display a list of resource
    */
   async index({}: HttpContext) {
-    return await Category.all()
+    return await User.all()
   }
 
   /**
@@ -17,23 +17,15 @@ export default class CategoriesController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {
-    
-
-  }
+  async store({ request }: HttpContext) {}
 
   /**
    * Show individual record
    */
   async show({ params }: HttpContext) {
-    return await Category.findOrFail(params.id)
+    return await User.findOrFail(params.id)
   }
-
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) {}
-
+  
   /**
    * Handle form submission for the edit action
    */
