@@ -26,18 +26,14 @@ export default class CategoriesController {
    * Show individual record
    */
   async show({ params }: HttpContext) {
-    return await Category.findOrFail(params.id)
+    const categoryById = await Category.findOrFail(params.id)
+    return categoryById
   }
 
   /**
    * Edit individual record
    */
   async edit({ params }: HttpContext) {}
-
-  /**
-   * Handle form submission for the edit action
-   */
-  async update({ params, request }: HttpContext) {}
 
   /**
    * Delete record

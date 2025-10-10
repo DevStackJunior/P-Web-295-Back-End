@@ -6,7 +6,12 @@ export default class BooksController {
    * Display a list of resource
    */
   async index({}: HttpContext) {
-    return await Book.all()
+    const book = await Book.query()
+    .preload('writer')
+    .preload('user')
+    .preload('category')
+
+    return await book
   }
 
   /**
@@ -32,6 +37,35 @@ export default class BooksController {
     .firstOrFail()
 
     return await book
+  }
+
+  async home({ }: HttpContext) {
+
+    const book = await Book.query()
+    .orderBy('created_at','desc')
+    .limit(5)
+    .preload('writer')
+    .preload('user')
+    .preload('category')    
+
+    return await book
+  }
+
+  async booksPerCategory({ params, response }: HttpContext) {
+
+    const books = await Book.query().where('category_id' , params.category_id)
+    .preload('writer')
+    .preload('user')
+    .preload('category')
+
+    return response.ok(books)
+  }
+
+  /**
+   * Show Books noted per user
+   */
+  async showPerUser({}: HttpContext) {
+
   }
 
   /**

@@ -23,8 +23,15 @@ export default class CommentsController {
    * Show individual record
    */
   async show({ params }: HttpContext) {
-    return await Comment.findOrFail(params.id)
-  }
+  
+      const comment = await Comment.query()
+      .preload('book')
+      .preload('user')
+      .where('id', params.id)
+      .firstOrFail()
+  
+      return await comment
+    }
 
   /**
    * Edit individual record

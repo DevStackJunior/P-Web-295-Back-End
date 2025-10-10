@@ -6,7 +6,9 @@ export default class EvaluatesController {
    * Display a list of resource
    */
   async index({}: HttpContext) {
-    return await Evaluate.all()
+    const evaluate = await Evaluate.all()
+
+    return evaluate
   }
 
   /**
@@ -23,18 +25,19 @@ export default class EvaluatesController {
    * Show individual record
    */
   async show({ params }: HttpContext) {
-    return await Evaluate.findOrFail(params.id)
+    const evaluate = await Evaluate.query()
+      .preload('book')
+      .preload('user')
+      .where('id', params.id)
+      .firstOrFail()
+      
+      return await evaluate
   }
 
   /**
    * Edit individual record
    */
   async edit({ params }: HttpContext) {}
-
-  /**
-   * Handle form submission for the edit action
-   */
-  async update({ params, request }: HttpContext) {}
 
   /**
    * Delete record
