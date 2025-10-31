@@ -5,9 +5,13 @@ export default class CommentsController {
   /**
    * Display a list of resource
    */
-  async index({}: HttpContext) {
-    return await Comment.all()
-  }
+ async index({ params, response }: HttpContext) {
+  const evaluates = await Comment.query()
+    .where('book_id', params.id)   
+    .preload('user')               
+
+  return response.ok(evaluates)
+}
 
   /**
    * Display form to create a new record
@@ -27,7 +31,7 @@ export default class CommentsController {
       const comment = await Comment.query()
       .preload('book')
       .preload('user')
-      .where('id', params.id)
+      .where('book_id', params.id)
       .firstOrFail()
   
       return await comment
@@ -41,7 +45,7 @@ export default class CommentsController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({}: HttpContext) {}
 
   /**
    * Delete record

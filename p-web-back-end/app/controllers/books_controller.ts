@@ -67,19 +67,28 @@ export default class BooksController {
   async showPerUser({}: HttpContext) {
 
   }
+async store({ request, auth, response }: HttpContext) {
+  //const user = auth.user!
+  const data = request.only(['title','number_of_pages','pdf_link','abstract','editor','edition_year','image_path','category_id','writer_id'])
+  const book = await Book.create({
+    ...data,
+    //userId: user.id, 
+  })
 
-  /**
-   * Edit individual record
-   */
-  //async edit({ params }: HttpContext) {}
-
-  /**
-   * Handle form submission for the edit action
-   */
-  //async update({ params, request }: HttpContext) {}
-
-  /**
-   * Delete record
-   */
-  //async destroy({ params }: HttpContext) {}
+  return response.created(book)
+}
+/////////////////////////////////////////////////////
+async update({ params, request, response }: HttpContext) {
+  const book = await Book.findOrFail(params.id)
+  const data = request.only(['title','number_of_pages','pdf_link','abstract','editor','edition_year','image_path','category_id','writer_id'])
+  book.merge(data)
+  await book.save()
+  return response.ok(book)
+}
+async destroy({ params, auth, response }: HttpContext) {
+  //const user = auth.user!
+  const book = await Book.findOrFail(params.id)
+  await book.delete()
+  return response.ok({ message: 'Livre supprimé avec succès.' })
+}
 }

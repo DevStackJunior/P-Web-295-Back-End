@@ -48,20 +48,21 @@ router.group(()=> {
 
   //Page Livre Détails | Description complète livre + tous les commentaires affichés par livre + toutes les évaluations par livre
   router.group(() => {
-    router.get('books', [BooksController, 'show'])
-
+    router.get('books', [BooksController, 'index'])
+    router.get('books/:id', [BooksController, 'show'])
+    router.get('books/:id/comments', [CommentsController, 'index'])
+    router.get('books/:id/evaluates', [EvaluatesController, 'index']) 
+    router.post('/books', [BooksController, 'store'])
+    router.put('/books/:id', [BooksController, 'update'])
+    router.delete('/books/:id', [BooksController, 'destroy'])
   })
-  router.group(() => {
-    router.get('comments', [CommentsController, 'show'])
-    router.get('evaluates', [EvaluatesController, 'show'])
     
-  })
 
 
 })
-
 //Données affichées seulement pour les utilisateurs connectés 
 router.group(() => {
-  
-
+ // router.post('/books', [BooksController, 'store'])
+ // router.put('/books/:id', [BooksController, 'update'])
+ // router.delete('/books/:id', [BooksController, 'destroy'])
 }).use(middleware.auth())

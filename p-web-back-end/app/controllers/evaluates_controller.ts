@@ -5,11 +5,13 @@ export default class EvaluatesController {
   /**
    * Display a list of resource
    */
-  async index({}: HttpContext) {
-    const evaluate = await Evaluate.all()
+ async index({ params, response }: HttpContext) {
+  const evaluates = await Evaluate.query()
+    .where('book_id', params.id)   
+    .preload('user')               
 
-    return evaluate
-  }
+  return response.ok(evaluates)
+}
 
   /**
    * Display form to create a new record
@@ -28,7 +30,7 @@ export default class EvaluatesController {
     const evaluate = await Evaluate.query()
       .preload('book')
       .preload('user')
-      .where('id', params.id)
+      .where('book_id', params.id)
       .firstOrFail()
       
       return await evaluate
