@@ -6,9 +6,10 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import Comment from './comment.js'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
+import Evaluate from './evaluate.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
-  uids: ['email'],
+  uids: ['username'],
   passwordColumnName: 'password',
 })
 
@@ -27,6 +28,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @hasMany(()=> Comment)
   declare comment: HasMany<typeof Comment> 
+  
+  @hasMany(() => Evaluate)
+  declare evaluates: HasMany<typeof Evaluate>
 
   //Représente la propriété creationDate
   @column.dateTime({ autoCreate: true })

@@ -15,6 +15,7 @@ import { middleware } from './kernel.js'
 import BooksController from '#controllers/books_controller'
 import CommentsController from '#controllers/comments_controller'
 import EvaluatesController from '#controllers/evaluates_controller'
+import AuthController from '#controllers/auth_controller'
 
 
 router.get('/', async () => {
@@ -26,6 +27,14 @@ router.get('/', async () => {
     router.get('books', [BooksController, 'booksPerCategory'])
     
 }).prefix('categories/:category_id')
+router
+ .group(() => {
+ router.post('register', [AuthController, 'register'])
+ router.post('login', [AuthController, 'login'])
+ router.post('logout', [AuthController, 'logout']).use(middleware.auth())
+ })
+ .prefix('user')
+
   router.group(() => {
     
     router.resource('writers', WritersController).apiOnly()
@@ -40,9 +49,9 @@ router.get('/', async () => {
     
     router.get('books/:id/Rewiews', [BooksController, 'getReviewsByBook'])
     
-    router.get('books/:id/comments', [CommentsController, 'index'])
+   //router.get('books/:id/comments', [CommentsController, 'index'])
     
-    router.get('books/:id/evaluates', [EvaluatesController, 'index']) 
+   //router.get('books/:id/evaluates', [EvaluatesController, 'index']) 
     
     router.post('/books', [BooksController, 'store'])
     
