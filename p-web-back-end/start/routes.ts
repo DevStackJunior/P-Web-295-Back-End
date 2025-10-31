@@ -22,44 +22,35 @@ router.get('/', async () => {
     hello: 'world',
   }
 })
-
-
-router.group(() => {
-  //router.resource('categories', CategoriesController).apiOnly()
-
-  router.resource('writers', WritersController).apiOnly()
-
-  router.resource('users', UsersController).apiOnly()
-
-  //Page Home | 5 Livres Affichés
-  router.get('/books/home', [BooksController, 'home'])
-
-  //Page Toutes Catégories confondues | Tous les Livres Affichés
   router.group(() => {
     router.get('books', [BooksController, 'booksPerCategory'])
     
-  }).prefix('categories/:category_id')
-  
-})
-
-//TESTER LES RECUPERATIONS DATA -  
-router.group(()=> {
-
-
-  //Page Livre Détails | Description complète livre + tous les commentaires affichés par livre + toutes les évaluations par livre
+}).prefix('categories/:category_id')
   router.group(() => {
-    router.get('books', [BooksController, 'index'])
-    router.get('books/:id', [BooksController, 'show'])
-    router.get('books/:id/comments', [CommentsController, 'index'])
-    router.get('books/:id/evaluates', [EvaluatesController, 'index']) 
-    router.post('/books', [BooksController, 'store'])
-    router.put('/books/:id', [BooksController, 'update'])
-    router.delete('/books/:id', [BooksController, 'destroy'])
-  })
     
-
-
+    router.resource('writers', WritersController).apiOnly()
+    
+    router.resource('users', UsersController).apiOnly()
+    //Page Home | 5 Livres Affichés
+    router.get('/books/home', [BooksController, 'home'])
+    
+    router.get('books', [BooksController, 'index'])
+    
+    router.get('books/:id', [BooksController, 'show'])
+    
+    router.get('books/:id/Rewiews', [BooksController, 'getReviewsByBook'])
+    
+    router.get('books/:id/comments', [CommentsController, 'index'])
+    
+    router.get('books/:id/evaluates', [EvaluatesController, 'index']) 
+    
+    router.post('/books', [BooksController, 'store'])
+    
+    router.put('/books/:id', [BooksController, 'update'])
+    
+    router.delete('/books/:id', [BooksController, 'destroy'])
 })
+
 //Données affichées seulement pour les utilisateurs connectés 
 router.group(() => {
  // router.post('/books', [BooksController, 'store'])

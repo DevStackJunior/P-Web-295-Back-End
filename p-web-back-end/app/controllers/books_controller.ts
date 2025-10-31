@@ -1,4 +1,6 @@
 import Book from '#models/book'
+import Comment from '#models/comment'
+import Evaluate from '#models/evaluate'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class BooksController {
@@ -91,4 +93,30 @@ async destroy({ params, auth, response }: HttpContext) {
   await book.delete()
   return response.ok({ message: 'Livre supprimé avec succès.' })
 }
+// Récupérer toutes les notes et commentaires pour ce livre
+  public async getReviewsByBook({ params, response }: HttpContext) {
+    const bookId = params.id
+ 
+    try {
+      const evaluates = await Evaluate.query().where('book_id', bookId)
+      const comments = await Comment.query().where('book_id', bookId)
+ 
+      // Fusionner par userId
+      const merged = evaluates.map(evaluate => {
+        const comment = comments.find(c => c.userId === evaluate.userId)
+        return {
+          userId: evaluate.userId,
+          rating: evaluate.note,
+          comment: comment?.comment || null,
+        }
+      })
+ 
+      return response.ok(merged)
+    } catch (error) {
+      return response.internalServerError({
+        message: 'Erreur serveur',
+        error: error.message,
+      })
+    }
+  }
 }
