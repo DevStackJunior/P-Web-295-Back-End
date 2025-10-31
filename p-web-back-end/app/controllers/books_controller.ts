@@ -1,4 +1,6 @@
 import Book from '#models/book'
+import Comment from '#models/comment'
+import Evaluate from '#models/evaluate'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class BooksController {
@@ -57,7 +59,7 @@ export default class BooksController {
     .preload('writer')
     .preload('user')
     .preload('category')
-
+    .preload('comment')
     return response.ok(books)
   }
 
@@ -67,19 +69,54 @@ export default class BooksController {
   async showPerUser({}: HttpContext) {
 
   }
+async store({ request, auth, response }: HttpContext) {
+  //const user = auth.user!
+  const data = request.only(['title','number_of_pages','pdf_link','abstract','editor','edition_year','image_path','category_id','writer_id'])
+  const book = await Book.create({
+    ...data,
+    //userId: user.id, 
+  })
 
-  /**
-   * Edit individual record
-   */
-  //async edit({ params }: HttpContext) {}
-
-  /**
-   * Handle form submission for the edit action
-   */
-  //async update({ params, request }: HttpContext) {}
-
-  /**
-   * Delete record
-   */
-  //async destroy({ params }: HttpContext) {}
+  return response.created(book)
+}
+/////////////////////////////////////////////////////
+async update({ params, request, response }: HttpContext) {
+  const book = await Book.findOrFail(params.id)
+  const data = request.only(['title','number_of_pages','pdf_link','abstract','editor','edition_year','image_path','category_id','writer_id'])
+  book.merge(data)
+  await book.save()
+  return response.ok(book)
+}
+async destroy({ params, auth, response }: HttpContext) {
+  //const user = auth.user!
+  const book = await Book.findOrFail(params.id)
+  await book.delete()
+  return response.ok({ message: 'Livre supprimé avec succès.' })
+}
+// Récupérer toutes les notes et commentaires pour ce livre
+  public async getReviewsByBook({ params, response }: HttpContext) {
+    const bookId = params.id
+ 
+    try {
+      const evaluates = await Evaluate.query().where('book_id', bookId)
+      const comments = await Comment.query().where('book_id', bookId)
+ 
+      // Fusionner par userId
+      const merged = evaluates.map(evaluate => {
+        const comment = comments.find(c => c.userId === evaluate.userId)
+        return {
+          userId: evaluate.userId,
+          rating: evaluate.note,
+          comment: comment?.comment || null,
+        }
+      })
+ 
+      return response.ok(merged)
+    } catch (error) {
+      return response.internalServerError({
+        message: 'Erreur serveur',
+        error: error.message,
+      })
+    }
+  }
 }
