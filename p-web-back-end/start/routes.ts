@@ -17,29 +17,16 @@ import CommentsController from '#controllers/comments_controller'
 import EvaluatesController from '#controllers/evaluates_controller'
 import AuthController from '#controllers/auth_controller'
 
-
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
   router.group(() => {
     router.get('books', [BooksController, 'booksPerCategory'])
     
 }).prefix('categories/:category_id')
-router
- .group(() => {
- router.post('register', [AuthController, 'register'])
- router.post('login', [AuthController, 'login'])
- router.post('logout', [AuthController, 'logout']).use(middleware.auth())
- })
- .prefix('user')
-
   router.group(() => {
     
     router.resource('writers', WritersController).apiOnly()
     
     router.resource('users', UsersController).apiOnly()
+    
     //Page Home | 5 Livres Affichés
     router.get('/books/home', [BooksController, 'home'])
     
@@ -52,17 +39,27 @@ router
    //router.get('books/:id/comments', [CommentsController, 'index'])
     
    //router.get('books/:id/evaluates', [EvaluatesController, 'index']) 
-    
-    router.post('/books', [BooksController, 'store'])
-    
-    router.put('/books/:id', [BooksController, 'update'])
-    
-    router.delete('/books/:id', [BooksController, 'destroy'])
 })
 
 //Données affichées seulement pour les utilisateurs connectés 
 router.group(() => {
- // router.post('/books', [BooksController, 'store'])
- // router.put('/books/:id', [BooksController, 'update'])
- // router.delete('/books/:id', [BooksController, 'destroy'])
+  router.post('/comments', [CommentsController, 'store'])
+  router.post('/evaluates', [EvaluatesController, 'store'])
+  router.put('/comments/:id', [CommentsController,'update'])
+  router.put('/evaluates/:id', [EvaluatesController,'update'])
+  router.delete('/comments/:id', [CommentsController, 'destroy'])
+  router.delete('/evaluates/:id', [EvaluatesController, 'destroy'])
+  router.post('/books', [BooksController, 'store'])   
+  router.put('/books/:id', [BooksController, 'update'])  
+  router.delete('/books/:id', [BooksController, 'destroy'])
 }).use(middleware.auth())
+
+
+//Utilisateur
+router
+ .group(() => {
+ router.post('register', [AuthController, 'register'])
+ router.post('login', [AuthController, 'login'])
+ router.post('logout', [AuthController, 'logout']).use(middleware.auth())
+ })
+ .prefix('user')

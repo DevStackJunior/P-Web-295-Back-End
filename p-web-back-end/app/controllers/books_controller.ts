@@ -59,7 +59,7 @@ export default class BooksController {
     .preload('writer')
     .preload('user')
     .preload('category')
-
+    .preload('comment')
     return response.ok(books)
   }
 

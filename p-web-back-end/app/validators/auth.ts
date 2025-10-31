@@ -16,6 +16,6 @@ export const registerValidator = vine.compile(
  const user = await query.from('users').where('username', field).first()
  return !user
  }),
- hash_password: vine.string().minLength(8).maxLength(512),
+ password: vine.string().minLength(8).maxLength(512),
  })
 )
